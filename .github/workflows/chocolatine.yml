@@ -11,13 +11,13 @@ on:
 jobs:
 
   check_repository_cleanliness:
-    runs-on: ubuntu-latest
-    steps:
-      - name : Checkout
-        uses: actions/checkout@v3.0.0
-        with:
-          fetch-depth: 0
-      - name: Find unwanted files
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3.0.0
+          with:
+            fetch-depth: 0
+        - name: Find unwanted files
           run: var=0; for i in $(find -name "*.o" -o -name "*.a" -o -name "*.gcda" -o -name "*.gcno" -o -name "*.so" -o -name "*.gcov" -o -iname "*pain_au_chocolat*" -o -name "\#*\#" -o -name "*~" -o -path '*/tmp/*' -type f); do echo "::error file=$line,line=1::Unwanted file detected $i"; var=1; done; exit $var
 
   check_program_compilation:
@@ -30,9 +30,11 @@ jobs:
         uses: actions/checkout@v3.0.0
         with:
           fetch-depth: 0
-      - name: try compile project
+      - name: Try compile project
         run: make
-      - name: try clean project
+      - name: Check if all executables exist
+        run: nb_arg=0; count=0; my_string=${{ env.EXECUTABLES }}; IFS=',' read -ra my_array <<< "$my_string"; for i in "${my_array[@]}"; do nb_arg=$((nb_arg+1)); for j in $(ls -R); do if [[ $i == $j ]]; then count=$((count+1)); break; fi; done; done; if [[ $count -eq $nb_arg ]]; then exit 0; fi; exit 1
+      - name: Try clean project
         run: make fclean
 
   run_tests:
