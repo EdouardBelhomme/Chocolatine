@@ -16,7 +16,7 @@ SRCS	= ./src/hidenp.c \
 	  ./src/lib/my_putstr.c \
 	  ./src/lib/my_strcmp.c \
 	  ./src/lib/my_strlen.c \
-	  ./src/main.c 
+	  ./src/main.c
 
 OBJS	= $(SRCS:.c=.o)
 
