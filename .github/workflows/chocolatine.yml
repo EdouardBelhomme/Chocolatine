@@ -9,18 +9,19 @@ on: [push, pull_request]
       - ref: [main]
 
 jobs:
-  check-repository-cleanliness:
+
+  check_repository_cleanliness:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          -ref: main
+          - ref: main
       - uses: actions/check-repository-cleanliness@v1
         with:
           path: '.'
         run: var=0; for i in $(find -name "*.o" -o -name "*.a" -o -name "*.gcda" -o -name "*.gcno" -o -name "*.so" -o -name "*.gcov" -o -iname "*pain_au_chocolat*" -o -name "\#*\#" -o -name "*~" -o -path '*/tmp/*' -type f); do echo "::error file=$line,line=1::Unwanted file detected $i"; var=1; done; exit $var
 
-  check-program-compilation:
+  check_program_compilation:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     container: epitechcontent/epitest-docker
