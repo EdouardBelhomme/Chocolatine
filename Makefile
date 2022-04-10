@@ -20,20 +20,29 @@ SRCS	= ./src/hidenp.c \
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS = -I ./include/
-CFLAGS += -Wall -Wextra
+CPPFLAGS = -I ./include/
+CFLAGS += -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	 $(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
+	 $(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(CPPFLAGS)
 
 clean:
-	$(RM) $(OBJS)
+	make clean -C tests/
+	$(RM) $(OBJS) $(OBJS:.o=.gcno) $(OBJS:.o=.gcda)
 
 fclean: clean
+	make fclean -C tests/
 	$(RM) $(NAME)
 
 re: fclean all
+
+unit_tests: CFLAGS += --coverage
+unit_tests: fclean all
+	make -C tests/
+
+tests_run: unit_tests
+	./tests/unit_tests
 
 .PHONY: all clean fclean re
