@@ -7,20 +7,20 @@
 
 #include <criterion/criterion.h>
 
-int hidenp(char const *str_1, char const *st_2);
+int hidenp(char const *needle, char const *haystack);
 
 Test(hidenp_1, ok)
 {
-    char const str_1[3] = "abc";
-    char const str_2[6] = "aubtjc";
+    char needle[] = "Hello";
+    char haystack[] = "Hello world!";
 
-    cr_assert(hidenp(str_1, str_2) == 0);
+    cr_assert(hidenp(needle, haystack) == 0);
 }
 
 Test(hidenp_2, nope)
 {
-    char const str_1[3] = "abc";
-    char const str_2[5] = "aubtj";
+    char const str_1[] = "abc";
+    char const str_2[] = "aubtj";
 
-    cr_assert(hidenp(str_1, str2) == 84);
+    cr_assert(hidenp(str_1, str_2) == 1);
 }

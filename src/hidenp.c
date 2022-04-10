@@ -7,24 +7,18 @@
 
 #include "my.h"
 
-int hidenp(char const *str_1, char const *str_2)
+int hidenp(char const *needle, char const *haystack)
 {
-    int len_str_1 = my_strlen(str_1);
-    int nb_letters = 0;
-    int tmp = 0;
+    int index_needle = 0;
+    int size_needle = my_strlen(needle);
 
-    if (!str_1 || !str_2)
-        return ERROR;
-    for (int i = 0; str_2[i] != '\0'; i++) {
-        if ((str_2[i] == str_1[tmp]) && (str_1)) {
-            nb_letters++;
-            tmp++;
-        }
-        if (nb_letters == len_str_1) {
-            my_putstr("1\n");
-            return SUCCESS;
-        }
+    if (!needle || !haystack)
+        return 84;
+    for (int index_hay = 0; haystack[index_hay] != '\0'; index_hay++) {
+        if (index_needle == size_needle)
+            return 0;
+        else if (needle[index_needle] == haystack[index_hay])
+            index_needle++;
     }
-    my_putstr("0\n");
-    return ERROR;
+    return 1;
 }

@@ -20,8 +20,6 @@ CFLAGS = -Wall -Werror -Wextra
 
 LDFLAGS = -lcriterion --coverage
 
-LDLIBS = -lmy
-
 CPPFLAGS = -I ../include/
 
 all: $(NAME)

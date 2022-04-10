@@ -20,6 +20,6 @@ int my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_strcmp(char const *s1, char const *s2);
 
-int hidenp(char const *str_1, char const *str_2);
+int hidenp(char const *needle, char const *haystack);
 
 #endif /* !MY_H_ */
