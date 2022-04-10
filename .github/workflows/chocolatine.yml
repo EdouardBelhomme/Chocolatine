@@ -48,7 +48,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: try tests
-        run: make test_run
+        run: make tests_run
 
   push_to_mirrors:
     needs: [run_tests]
