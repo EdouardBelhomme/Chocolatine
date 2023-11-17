@@ -24,3 +24,11 @@ Test(hidenp_2, nope)
 
     cr_assert(hidenp(str_1, str_2) == 1);
 }
+
+Test(hidenp_3, nope)
+{
+    char const str_1[] = "abc";
+    char const str_2[] = "aubtj";
+
+    cr_assert(hidenp(str_1, str_2) == 1);
+}
